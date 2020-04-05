@@ -10,10 +10,10 @@ from clicklink import rinse
 def get_views(browser):
 
     video_views = str()
-    view_path = "//yt-view-count-renderer[@class='style-scope ytd-video-primary-info-renderer']/span[@class='view-count style-scope yt-view-count-renderer']"
+    view_path = "//span[@class='view-count style-scope yt-view-count-renderer']"
 
     try:
-        view_count = browser.find_element_by_xpath(view_path)
+        view_count = WebDriverWait(browser, 5).until(EC.visibility_of_element_located((By.XPATH, view_path)))
         video_views = view_count.text.replace(" views", "")
     except:
         print("Unable to find view count... keeping flow")
@@ -41,6 +41,8 @@ def get_description_links(youtube_link):
 
         try:
 
+            # Get Video views
+            video_views = get_views(browser)
             # Find show more button
             show_more_button = browser.find_element_by_class_name(button_class_name)
             # Click show more button
@@ -53,8 +55,6 @@ def get_description_links(youtube_link):
             sus_elements = elementfilter.sus(elements)
             # Click on all sus links and get their true link
             sus_links = rinse(browser, sus_elements)
-            # Get Video views
-            video_views = get_views(browser)
 
         except:
             print("No show more button... keeping flow")
