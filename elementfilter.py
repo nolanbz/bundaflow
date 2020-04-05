@@ -46,7 +46,7 @@ def product(links):
 
     for link in links:
         if "amazon.com" in link:
-            if "product" in link:
+            if "shop" not in link:
                 product_links.append(link)
     
     return product_links
