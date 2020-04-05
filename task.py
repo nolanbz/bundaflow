@@ -9,7 +9,7 @@ app = Celery()
 app.conf.broker_url = os.environ.get("CLOUDAMQP_URL")
 
 def add_consumer(channel_id):    
-    app.control.add_consumer(queue=channel_id, auto_delete=True, reply=True)
+    app.control.add_consumer(queue=channel_id, reply=True)
 
 @app.task
 def amazon_links(channel_id, video_id, youtube_link):
