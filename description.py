@@ -25,6 +25,7 @@ def get_description_links(youtube_link):
     browser = driver()
     response = dict()
     clean_links = list()
+    sus_links = list()
     sus_elements = dict()
     video_views = str()
     
