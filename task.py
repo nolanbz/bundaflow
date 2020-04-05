@@ -13,12 +13,10 @@ def add_consumer(channel_id):
 
 @app.task
 def amazon_links(channel_id, video_id, youtube_link):
-    
-    video_views = str()
-    # TODO get view views with bs
-    
-    links = get_description_links(youtube_link)
-    all_links = links["sus_links"] + links["clean_links"]
+     
+    data = get_description_links(youtube_link)
+    all_links = data["sus_links"] + data["clean_links"]
+    video_views = data["video_views"]
     product_links = elementfilter.product(all_links)
     shop_links = elementfilter.shop(all_links)
     abunda_ids = create_ids(product_links)

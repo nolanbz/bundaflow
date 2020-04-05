@@ -7,12 +7,26 @@ from browser import driver
 import elementfilter
 from clicklink import rinse
 
+def get_views(browser):
+
+    video_views = str()
+    view_path = "//yt-view-count-renderer[@class='style-scope ytd-video-primary-info-renderer']/span[@class='view-count style-scope yt-view-count-renderer']"
+
+    try:
+        view_count = browser.find_element_by_xpath(view_path)
+        video_views = view_count.text.replace(" views", "")
+    except:
+        print("Unable to find view count... keeping flow")
+
+    return video_views
+
 def get_description_links(youtube_link):
 
     browser = driver()
     response = dict()
     clean_links = list()
     sus_elements = dict()
+    video_views = str()
     
     browser.get(youtube_link)
     video_path = "//yt-formatted-string[@class='style-scope ytd-video-primary-info-renderer']"
@@ -38,6 +52,8 @@ def get_description_links(youtube_link):
             sus_elements = elementfilter.sus(elements)
             # Click on all sus links and get their true link
             sus_links = rinse(browser, sus_elements)
+            # Get Video views
+            video_views = get_views(browser)
 
         except:
             print("No show more button... keeping flow")
@@ -48,7 +64,7 @@ def get_description_links(youtube_link):
 
     browser.quit()
 
-    response = {"sus_links": sus_links, "clean_links": clean_links}
+    response = {"sus_links": sus_links, "clean_links": clean_links, "video_views": video_views}
 
     return response
 
