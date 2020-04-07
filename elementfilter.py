@@ -69,3 +69,12 @@ def present_link(links, keyword):
             present = True
     
     return present
+
+def all_links(description_elements):
+    elements = list()
+
+    for ele in description_elements:
+        if "http" in ele.text:
+            elements.append(ele.text)
+
+    return elements
