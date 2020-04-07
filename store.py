@@ -14,20 +14,29 @@ def get_store_links(store_link):
     
     
     browser.get(store_link)
-    video_path = "//yt-formatted-string[@class='style-scope ytd-video-primary-info-renderer']"
+    link_path = "//a[@class='a-link-normal']"
 
     try:
         WebDriverWait(browser, 20).until(
-        EC.visibility_of_element_located((By.XPATH, video_path)))
+        EC.visibility_of_element_located((By.XPATH, link_path)))
+
+        elements = browser.find_elements_by_xpath(link_path)
+
+
+        for ele in elements:
+            print(ele.get_attribute('href'))
 
         
             
     except TimeoutException:
         
-        print("Failed to load youtube video link... keeping flow")
+        print("Failed to load amazon store... keeping flow")
 
     browser.quit()
 
     response = {"amazon_links": amazon_links}
 
     return response
+
+store = "https://www.amazon.com/shop/tronicsfix"
+get_store_links(store)

@@ -20,7 +20,7 @@ def get_views(browser):
 
     return video_views
 
-def get_description_links(youtube_link):
+def get_description_links(youtube_link, rinse_links):
 
     browser = driver()
     response = dict()
@@ -28,6 +28,7 @@ def get_description_links(youtube_link):
     sus_links = list()
     sus_elements = dict()
     video_views = str()
+    all_links = list()
     
     browser.get(youtube_link)
     video_path = "//yt-formatted-string[@class='style-scope ytd-video-primary-info-renderer']"
@@ -49,6 +50,14 @@ def get_description_links(youtube_link):
             show_more_button.click()
             # Get all elements in the description
             elements = browser.find_elements_by_xpath(link_path)
+
+
+            if rinse_links:
+                all_links = elementfilter.http(elements)
+                response = {"all_links": all_links}
+                return response
+
+
             # Get all clean easy to convert links
             clean_links = elementfilter.clean(elements)
             # Get all sus hard to convert link elements
@@ -71,9 +80,9 @@ def get_description_links(youtube_link):
 
 def link_present(youtube_link, keyword):
     
-    links = get_description_links(youtube_link)
+    links = get_description_links(youtube_link, True)
 
-    all_links = links["sus_links"] + links["clean_links"]
+    all_links = links["all_links"]
 
     present = elementfilter.present_link(all_links, keyword)
 
