@@ -9,7 +9,7 @@ def run_video(channel_id, video_id, youtube_link):
     if channel_id:
         if video_id:
             if youtube_link:
-                payload = "converting"
+                payload = "Converting"
                 amazon_links.apply_async((channel_id, video_id, youtube_link), queue=channel_id)
                 add_consumer(channel_id)
             else:
@@ -31,7 +31,7 @@ def check_link(channel_id, video_id, youtube_link):
         if video_id:
             if youtube_link:
                 detected = link_present(youtube_link, "abunda")
-                payload = "we workin"
+                payload = "Checking link"
             else:
                 payload = "missing link", 400
         else:

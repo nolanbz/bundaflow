@@ -51,7 +51,7 @@ def get_description_links(youtube_link, rinse_links):
             # Get all elements in the description
             elements = browser.find_elements_by_xpath(link_path)
 
-            # Used for checking links are present in description
+            # Used for checking if links are present in description
             if rinse_links:
                 all_links = elementfilter.all_links(elements)
                 response = {"all_links": all_links}
