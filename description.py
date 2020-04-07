@@ -74,7 +74,7 @@ def get_description_links(youtube_link, rinse_links):
 
     browser.quit()
 
-    response = {"sus_links": sus_links, "clean_links": clean_links, "video_views": video_views}
+    response = {"sus_links": sus_links, "clean_links": clean_links, "video_views": video_views, "all_links": all_links }
 
     return response
 
@@ -89,4 +89,4 @@ def link_present(youtube_link, keyword):
     return present
 
 
-
+link_present("https://www.youtube.com/watch?v=0eL_yR79xjU", "abunda")
