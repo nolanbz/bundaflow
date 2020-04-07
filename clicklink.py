@@ -13,7 +13,7 @@ def rinse(browser, elements):
 
     full_links = list()
     black_list = ["youtube", "pinterest", "blogspot", "instagram", "twitter", "facebook", "goo.gl", "kit.co",
-                  "discord", "banggood", "tubebuddy", "gearbest", "spinning" "mikesunboxing", "knockies"]
+                  "discord", "banggood", "tubebuddy", "gearbest", "spinning" "mikesunboxing", "knockies", "darkhorse"]
 
     # Save Video tab
     original_handle = browser.current_window_handle

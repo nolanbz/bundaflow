@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 
 from browser import driver
 
+import time
+
 def get_store_links(store_link):
 
     browser = driver()
@@ -14,7 +16,7 @@ def get_store_links(store_link):
     
     
     browser.get(store_link)
-    link_path = "//a[@class='a-link-normal']"
+    link_path = "//a[@class='a-link-normal']/div[@class='overlay']"
 
     try:
         WebDriverWait(browser, 20).until(
@@ -24,7 +26,18 @@ def get_store_links(store_link):
 
 
         for ele in elements:
-            print(ele.get_attribute('href'))
+            
+            ele.click()
+            time.sleep(3)
+            links = browser.find_elements_by_xpath("//a[@class='a-link-normal']")
+            
+            print(len(links))
+            for link in links:
+                
+                href = link.find_element_by_class_name("a-link-normal").get_attribute("href")
+                # href = link.find_element_by_class_name("a-link-normal")
+                print(href)
+
 
         
             
