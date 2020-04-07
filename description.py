@@ -87,6 +87,3 @@ def link_present(youtube_link, keyword):
     present = elementfilter.present_link(all_links, keyword)
 
     return present
-
-
-link_present("https://www.youtube.com/watch?v=0eL_yR79xjU", "abunda")
