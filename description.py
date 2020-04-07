@@ -55,6 +55,7 @@ def get_description_links(youtube_link, rinse_links):
             if rinse_links:
                 all_links = elementfilter.all_links(elements)
                 response = {"all_links": all_links}
+                browser.quit()
                 return response
 
 
