@@ -20,7 +20,7 @@ def amazon_links(channel_id, video_id, youtube_link):
     video_views = data["video_views"]
     product_links = elementfilter.product(all_links)
     shop_links = elementfilter.shop(all_links)
-    abunda_ids = create_ids(product_links)
+    abunda_ids = create_ids(product_links, True)
 
     posts.big_post(channel_id, video_id, video_views, abunda_ids, shop_links)
 
@@ -28,7 +28,7 @@ def amazon_links(channel_id, video_id, youtube_link):
 def amazon_store(channel_id, store_link):
 
     amazon_links = get_store_links(store_link)
-    abunda_ids = create_ids(amazon_links)
+    abunda_ids = create_ids(amazon_links, False)
 
     posts.store_post(channel_id, abunda_ids)
     

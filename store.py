@@ -16,11 +16,10 @@ def get_store_links(store_link):
     
     browser.get(store_link)
     link_path = "//a[@class='a-link-normal']"
-    store_avatar = "//div[@class='a-profile-avatar-wrapper']/div[@class='a-profile-avatar']/img/@src"
-    
+
     try:
         WebDriverWait(browser, 20).until(
-        EC.visibility_of_element_located((By.XPATH, store_avatar)))
+        EC.visibility_of_element_located((By.XPATH, link_path)))
 
         elements = browser.find_elements_by_xpath(link_path)
 
