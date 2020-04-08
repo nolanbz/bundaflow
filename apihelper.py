@@ -44,7 +44,7 @@ def check_link(channel_id, video_id, youtube_link):
 
     return JSON
 
-def upload_store(channel_id, store_link):
+def store_upload(channel_id, store_link):
 
     payload = str()
 
