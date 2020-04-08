@@ -78,3 +78,14 @@ def all_links(description_elements):
             elements.append(ele.text)
 
     return elements
+
+
+def store_filter(description_elements):
+    links = list()
+
+    for ele in description_elements:
+        link = ele.get_attribute("href")
+        if "shop" not in link:
+            links.append(link)
+
+    return links

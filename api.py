@@ -3,7 +3,7 @@ from flask_restful import reqparse
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 from task import amazon_links, add_consumer
-from apihelper import run_video, check_link
+from apihelper import run_video, check_link, store_upload
 import os
 
 username = os.environ.get('USERNAME')
@@ -55,6 +55,21 @@ def link_check():
     JSON = check_link(channel_id, video_id, youtube_link)
     
     return JSON
+
+@app.route("/store-upload/", strict_slashes=False, methods=["POST"])
+@auth.login_required
+def upload_store():
+    parser = reqparse.RequestParser()
+    parser.add_argument("store_url")
+    parser.add_argument("channel_id")
+    args = parser.parse_args()
+    
+    channel_id = args["channel_id"]
+    store_url = args["store_url"]
+    
+    payload = store_upload(channel_id, store_url)
+    
+    return {"message":payload}
 
 
 # Welcome to PEEWEE

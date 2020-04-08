@@ -4,6 +4,7 @@ from description import get_description_links
 import elementfilter
 import os
 import posts
+from store import get_store_links
 
 app = Celery()
 app.conf.broker_url = os.environ.get("CLOUDAMQP_URL")
@@ -22,5 +23,13 @@ def amazon_links(channel_id, video_id, youtube_link):
     abunda_ids = create_ids(product_links)
 
     posts.big_post(channel_id, video_id, video_views, abunda_ids, shop_links)
+
+@app.task
+def amazon_store(channel_id, store_link):
+
+    amazon_links = get_store_links(store_link)
+    abunda_ids = create_ids(amazon_links)
+
+    posts.store_post(channel_id, abunda_ids)
     
     

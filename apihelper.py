@@ -1,5 +1,5 @@
 
-from task import amazon_links, add_consumer
+from task import amazon_links, add_consumer, store_upload
 from description import link_present
 
 def run_video(channel_id, video_id, youtube_link):
@@ -43,3 +43,19 @@ def check_link(channel_id, video_id, youtube_link):
 
 
     return JSON
+
+def upload_store(channel_id, store_link):
+
+    payload = str()
+
+    if channel_id:        
+        if store_link:
+            payload = "Uploading store"
+            store_upload.apply_async((channel_id, store_link), queue=channel_id)
+            add_consumer(channel_id)
+        else:
+            payload = "missing store link", 400
+    else:
+        payload = "missing channel_id", 400
+    
+    return payload
