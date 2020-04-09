@@ -29,6 +29,8 @@ def get_store_links(store_link):
     except TimeoutException:
         
         print("Failed to load amazon store... keeping flow")
+    
+    browser.save_screenshot('screenie.png')
 
 
     for link in category_links:
@@ -50,5 +52,7 @@ def get_store_links(store_link):
     browser.quit()
 
     response = {"amazon_links": amazon_links}
+
+    print(response)
 
     return response

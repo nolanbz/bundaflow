@@ -33,8 +33,12 @@ def rinse(browser, elements):
             browser.switch_to.window(handle)
 
             # Attempt to get current URL untill page fully loads
+            i = 0
             while browser.current_url in "about:blank":
-                time.sleep(0.5)                                            
+                i += 1
+                time.sleep(0.5)
+                if i == 20:
+                    break
 
             # Save URL         
             full_links.append(browser.current_url)
